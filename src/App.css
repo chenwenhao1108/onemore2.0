@@ -1,0 +1,203 @@
+* {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	box-sizing: border-box;
+	background-color: #eeeeee;
+}
+
+body {
+	font-family: 'Inter', sans-serif;
+}
+
+a {
+	color: #4d4d4d;
+	font-weight: 600;
+	padding: 0.5rem 0;
+	text-decoration: none;
+	background-color: transparent;
+}
+
+a:hover {
+	color: black;
+}
+
+header {
+	width: 100%;
+	height: 4rem;
+	display: flex;
+	align-items: center;
+	background-color: white;
+	padding: 0 2rem;
+}
+
+header .site-logo {
+	color: black;
+	margin-right: auto;
+	text-transform: uppercase;
+	font-weight: 900;
+	font-size: 25px;
+}
+
+header a {
+	padding: 1rem 2rem;
+}
+
+.check-in {
+	height: 12rem;
+	width: 12rem;
+	background-color: white;
+	border-radius: 5px;
+	margin: 2rem auto;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.check-in:hover {
+	cursor: pointer;
+}
+
+.deck {
+	width: 80%;
+	background-color: white;
+	margin: 2rem auto;
+	border-radius: 5px;
+	display: flex;
+
+	padding: 0.5rem 1rem;
+}
+
+.deck-cover {
+	background-color: #4d4d4d;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.deck-info {
+	margin-left: 1rem;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+.footer-nav {
+	height: 3rem;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: white;
+}
+
+.footer-nav a {
+	width: 8rem;
+	padding: 0.5rem 2rem;
+}
+
+.create-menu {
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	border-radius: 5px;
+	margin: 0 auto;
+	width: 10rem;
+}
+
+.create-menu div {
+	background-color: transparent;
+	height: 100vh;
+	width: 100vw;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: -1;
+}
+
+.avatar {
+	border-radius: 50%;
+	margin: 2rem auto;
+	height: 8rem;
+	width: 8rem;
+	background-color: white;
+}
+
+.settings {
+	background-color: white;
+	margin: 3rem auto;
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	border-radius: 5px;
+}
+
+.settings div {
+	background-color: transparent;
+}
+
+.create-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 1rem 2rem;
+}
+
+.deck-title-input {
+	height: 2.5rem;
+	width: 80%;
+	background-color: white;
+	border: unset;
+	border-radius: 5px;
+	font-size: medium;
+	text-align: left;
+	padding-left: 1rem;
+}
+
+.deck-title-input:focus {
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+	outline: none;
+}
+
+.cover-container {
+	background-color: white;
+	width: 80%;
+	height: 70vh;
+	margin: 1rem auto;
+	text-align: left;
+	padding: 1.5rem;
+	border-radius: 5px;
+	overflow-y: scroll;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.cover-container p {
+	background-color: transparent;
+	font-size: large;
+	font-weight: 600;
+	height: 1.8rem;
+	width: 100%;
+}
+
+.add-cover {
+	height: 10rem;
+	width: 7rem;
+	margin: 1.5rem;
+	border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2rem;
+}
+
+.cover {
+	height: 10rem;
+	width: 7rem;
+	margin: 1.5rem;
+	border-radius: 8px;
+}
