@@ -1,12 +1,16 @@
 import React from 'react'
 
-export default function Deck() {
+export default function Deck({
+	title,
+	cover = 'src/pics/cafe.png',
+	duration = 0,
+}) {
 	return (
 		<div className='deck'>
-			<div className='deck-cover'>img here</div>
+			<img src={cover} className='deck-cover' />
 			<div className='deck-info'>
-				<h4>DeckName</h4>
-				<p>Learning Minutes</p>
+				<h4>{title}</h4>
+				<p>Duration: {duration} minutes</p>
 				<p>progress bar</p>
 			</div>
 		</div>

@@ -3,11 +3,11 @@
 	padding: 0;
 	text-align: center;
 	box-sizing: border-box;
-	background-color: #eeeeee;
+	font-family: 'Inter', sans-serif;
 }
 
 body {
-	font-family: 'Inter', sans-serif;
+	background-color: #eeeeee;
 }
 
 a {
@@ -43,39 +43,24 @@ header a {
 	padding: 1rem 2rem;
 }
 
-.check-in {
-	height: 12rem;
-	width: 12rem;
-	background-color: white;
-	border-radius: 5px;
-	margin: 2rem auto;
-	font-weight: 600;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.check-in:hover {
-	cursor: pointer;
-}
-
 .deck {
 	width: 80%;
 	background-color: white;
 	margin: 2rem auto;
 	border-radius: 5px;
 	display: flex;
-
-	padding: 0.5rem 1rem;
+	padding: 1rem 1rem;
 }
 
 .deck-cover {
 	background-color: #4d4d4d;
-	border: 1px solid black;
 	border-radius: 5px;
+	height: 7rem;
+	width: 6rem;
 }
 
 .deck-info {
+	background-color: transparent;
 	margin-left: 1rem;
 }
 
@@ -150,10 +135,10 @@ footer {
 .deck-title-input {
 	height: 2.5rem;
 	width: 80%;
-	background-color: white;
 	border: unset;
 	border-radius: 5px;
 	font-size: medium;
+	font-weight: 500;
 	text-align: left;
 	padding-left: 1rem;
 }
@@ -193,11 +178,94 @@ footer {
 	justify-content: center;
 	align-items: center;
 	font-size: 2rem;
+	background-color: #eeeeee;
 }
 
 .cover {
 	height: 10rem;
 	width: 7rem;
-	margin: 1.5rem;
 	border-radius: 8px;
+}
+
+.dashboard {
+	display: flex;
+	justify-content: space-between;
+	width: 80%;
+	margin: 2rem auto;
+}
+
+.dashboard-card {
+	height: 12rem;
+	width: 12rem;
+	background-color: white;
+	border-radius: 5px;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.dashboard-card:hover {
+	cursor: pointer;
+}
+
+.cover-frame {
+	position: relative;
+	margin: 1.5rem;
+}
+
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 10rem;
+	width: 7rem;
+	border-radius: 8px;
+	font-size: 3rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.notification {
+	position: fixed;
+	top: 3rem;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: larger;
+	font-weight: 600;
+	font-family: Kanit;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 3rem;
+	width: 50%;
+	border-radius: 8px;
+	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.fade-out {
+	animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+.notification.success {
+	background-color: #95e1d3;
+}
+
+.notification.warning {
+	background-color: #fce38a;
+}
+
+.notification.error {
+	background-color: #f38181;
 }
