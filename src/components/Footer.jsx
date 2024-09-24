@@ -7,8 +7,8 @@ export default function Footer() {
 	const menuElement = (
 		<div className='create-menu' onClick={() => setOpen(false)}>
 			<div onClick={() => setOpen(false)}></div>
-			<Link to='/createdeck'>Create Deck</Link>
-			<Link to='/createcard'>Create Card</Link>
+			<Link to='/createDeck'>Create Deck</Link>
+			<Link to='/createCard'>Create Card</Link>
 		</div>
 	)
 	return (

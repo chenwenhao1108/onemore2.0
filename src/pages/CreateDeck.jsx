@@ -33,7 +33,7 @@ export default function CreateDeck() {
 			})
 			return
 		}
-		if (!coverIndex) {
+		if (!coverIndex && coverIndex !== 0) {
 			setShowNotification(true)
 			setMessage({
 				message: "Cover can't be empty!",
@@ -66,6 +66,11 @@ export default function CreateDeck() {
 						cover: covers[coverIndex],
 					},
 				])
+				setShowNotification(true)
+				setMessage({
+					message: 'Deck is created!',
+					status: 'success',
+				})
 			}
 		}
 	}

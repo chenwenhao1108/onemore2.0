@@ -68,6 +68,7 @@ footer {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
+	height: 3rem;
 }
 
 .footer-nav {
@@ -268,4 +269,156 @@ footer {
 
 .notification.error {
 	background-color: #f38181;
+}
+
+.menu {
+	position: relative;
+	width: 8rem;
+}
+
+.menu-button {
+	background-color: white;
+	padding: 0.5rem 1.5rem;
+	border-radius: 5px;
+	width: 100%;
+	border: none;
+	cursor: pointer;
+	z-index: 2;
+	position: relative;
+	color: #4d4d4d;
+	font-weight: 600;
+}
+
+.menu-button:hover {
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.menu-dropdown {
+	position: absolute;
+	left: 0;
+	background-color: white;
+	border: 1px solid gray;
+	border-radius: 6px;
+	width: 100%;
+	border: none;
+	z-index: 2;
+}
+
+.menu-item {
+	color: #4d4d4d;
+	font-weight: 600;
+	padding: 0.75rem;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	user-select: none;
+	background-color: transparent;
+	width: 100%;
+	border: none;
+}
+
+.menu-item:hover {
+	background-color: whitesmoke;
+}
+
+.menu-close {
+	position: fixed;
+	background-color: black;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	background-color: transparent;
+}
+
+.create-card-header {
+	margin: 1rem 4rem;
+	display: flex;
+	gap: 1rem;
+}
+
+.note-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 1rem 4rem;
+}
+
+.note-card textarea {
+	border: none;
+	border-radius: 5px;
+	font-family: 'Courier New', Courier, monospace;
+	text-align: left;
+	padding: 1.5rem;
+	font-weight: 600;
+	font-size: larger;
+	resize: none;
+}
+
+.note-card textarea:focus {
+	outline: none;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.note-card .note-card-title {
+	height: 20vh;
+}
+
+.note-card .note-card-summary {
+	margin-top: 2px;
+	height: 40vh;
+}
+
+.create-card-footer {
+	position: relative;
+	margin-top: 3rem;
+}
+
+.create-card-footer,
+.font-bar {
+	width: 100%;
+	padding: 0 4rem;
+	display: flex;
+	justify-content: center;
+	gap: 2rem;
+}
+
+.create-card-footer button,
+.font-bar button {
+	background-color: white;
+	height: 3rem;
+	width: 3rem;
+	border: none;
+	border-radius: 50%;
+}
+
+.create-card-footer button:hover {
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.create-card-footer button:active {
+	border: 1px solid orange;
+}
+
+.create-card-page {
+	margin-bottom: 4rem;
+}
+
+.font-bar * {
+	font-weight: 600;
+}
+
+.font-bar .font-bar-italic {
+	font-style: italic;
+}
+
+.font-bar .font-bar-underline {
+	text-decoration: underline;
+}
+
+.font-bar {
+	position: absolute;
+	bottom: 3rem;
 }

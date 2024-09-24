@@ -6,6 +6,9 @@ import Layout from './components/Layout'
 import User from './pages/User'
 import CreateDeck from './pages/CreateDeck'
 import useUpdateEffect from './hooks/useUpdateEffect'
+import ChoiceCard from './pages/CreateCard/ChoiceCard'
+import NoteCard from './pages/CreateCard/NoteCard'
+import CreateCardLayout from './pages/CreateCard/CreateCardLayout'
 
 const DecksContext = createContext()
 
@@ -27,7 +30,11 @@ function App() {
 					<Route path='/' element={<Layout />}>
 						<Route index element={<Home />} />
 						<Route path='user' element={<User />} />
-						<Route path='createdeck' element={<CreateDeck />} />
+						<Route path='create' element={<CreateCardLayout />}>
+							<Route path='Choice' element={<ChoiceCard />} />
+							<Route path='Note' element={<NoteCard />} />
+						</Route>
+						<Route path='create/deck' element={<CreateDeck />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>
