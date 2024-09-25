@@ -30,16 +30,16 @@ export default function CreateCardFooter() {
 				<i className='fa-solid fa-circle'></i>
 			</button>
 			<button>
-				<i class='fa-solid fa-circle' style={{ color: '#FFD43B' }}></i>
+				<i className='fa-solid fa-circle' style={{ color: '#FFD43B' }}></i>
 			</button>
 			<button>
-				<i class='fa-solid fa-circle' style={{ color: '#63E6BE' }}></i>
+				<i className='fa-solid fa-circle' style={{ color: '#63E6BE' }}></i>
 			</button>
 			<button className='font-bar-italic'>
-				<i class='fa-solid fa-circle' style={{ color: '#74C0FC' }}></i>
+				<i className='fa-solid fa-circle' style={{ color: '#74C0FC' }}></i>
 			</button>
 			<button className='font-bar-underline'>
-				<i class='fa-solid fa-circle' style={{ color: '#B197FC' }}></i>
+				<i className='fa-solid fa-circle' style={{ color: '#B197FC' }}></i>
 			</button>
 		</div>
 	)
@@ -50,7 +50,10 @@ export default function CreateCardFooter() {
 				{size && fontSizeBar}
 				{color && fontColorBar}
 				<button onClick={() => setBold(!bold)}>
-					<i class='fa-solid fa-b' style={bold ? { color: '#FFD43B' } : {}}></i>
+					<i
+						className='fa-solid fa-b'
+						style={bold ? { color: '#FFD43B' } : {}}
+					></i>
 				</button>
 				<button onClick={toggleSize}>
 					{size ? (

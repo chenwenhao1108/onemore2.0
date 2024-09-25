@@ -12,7 +12,7 @@ export default function CreateCardHeader() {
 				menu={typeArr.map((type) => (
 					<Link to={type}>{type}</Link>
 				))}
-				icon={<i class='fa-solid fa-bars'></i>}
+				icon={<i className='fa-solid fa-bars'></i>}
 			/>
 			<Dropdown
 				menu={decks.map((deck) => deck.title)}

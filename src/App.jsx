@@ -9,6 +9,7 @@ import useUpdateEffect from './hooks/useUpdateEffect'
 import ChoiceCard from './pages/CreateCard/ChoiceCard'
 import NoteCard from './pages/CreateCard/NoteCard'
 import CreateCardLayout from './pages/CreateCard/CreateCardLayout'
+import NoteCard2 from './pages/CreateCard/NoteCard2'
 
 const DecksContext = createContext()
 
@@ -32,7 +33,7 @@ function App() {
 						<Route path='user' element={<User />} />
 						<Route path='create' element={<CreateCardLayout />}>
 							<Route path='Choice' element={<ChoiceCard />} />
-							<Route path='Note' element={<NoteCard />} />
+							<Route path='Note' element={<NoteCard2 />} />
 						</Route>
 						<Route path='create/deck' element={<CreateDeck />} />
 					</Route>
