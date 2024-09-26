@@ -9,7 +9,7 @@ import useUpdateEffect from './hooks/useUpdateEffect'
 import ChoiceCard from './pages/CreateCard/ChoiceCard'
 import NoteCard from './pages/CreateCard/NoteCard'
 import CreateCardLayout from './pages/CreateCard/CreateCardLayout'
-import NoteCard2 from './pages/CreateCard/NoteCard2'
+import NoteCard2 from './pages/CreateCard/NoteCard'
 
 const DecksContext = createContext()
 

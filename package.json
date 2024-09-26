@@ -10,7 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tiptap/extension-blockquote": "^2.7.3",
+    "@tiptap/extension-code-block": "^2.7.3",
     "@tiptap/extension-color": "^2.7.2",
+    "@tiptap/extension-history": "^2.7.3",
     "@tiptap/pm": "^2.7.2",
     "@tiptap/react": "^2.7.2",
     "@tiptap/starter-kit": "^2.7.2",

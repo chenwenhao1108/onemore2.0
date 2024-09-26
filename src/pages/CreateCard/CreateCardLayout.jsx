@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { DecksContext } from '../../App'
+import React from 'react'
 import { Outlet } from 'react-router-dom'
-import CreateCardHeader from '../../components/CreateCardHeader'
-import CreateCardFooter from '../../components/CreateCardFooter'
+import CreateCardHeader from '../../components/createCard/CreateCardHeader'
+import { EditorContextProvider } from '../../context/EditorContextProvider'
 
-export default function CreateCard() {
+export default function CreateCardLayout() {
 	return (
-		<div className='create-card-page'>
-			<CreateCardHeader />
-			<Outlet />
-			<CreateCardFooter />
-		</div>
+		<EditorContextProvider>
+			<div className='create-card-page'>
+				<CreateCardHeader />
+				<Outlet />
+			</div>
+		</EditorContextProvider>
 	)
 }
