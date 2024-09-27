@@ -12,12 +12,12 @@ export default function CreateDeck() {
 	const { decks, setDecks } = useContext(DecksContext)
 
 	const covers = [
-		'src/pics/cafe.png',
-		'src/pics/girl with a pearl earring.png',
-		'src/pics/sleeping lily.png',
-		'src/pics/sunflower.png',
-		'src/pics/sunrise.png',
-		'src/pics/The Starry Night.png',
+		'../src/pics/cafe.png',
+		'../src/pics/girl with a pearl earring.png',
+		'../src/pics/sleeping lily.png',
+		'../src/pics/sunflower.png',
+		'../src/pics/sunrise.png',
+		'../src/pics/The Starry Night.png',
 	]
 
 	function choseCover(index) {
