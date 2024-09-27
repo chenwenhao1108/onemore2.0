@@ -32,7 +32,7 @@ export default function CustomFloatingMenu({ editor }) {
 							setShowMenu(false)
 						}}
 					>
-						-
+						<i className='fa-solid fa-minus'></i>
 					</button>
 					<button
 						onClick={() =>
@@ -96,16 +96,16 @@ export default function CustomFloatingMenu({ editor }) {
 						onClick={() => editor.chain().focus().toggleBlockquote().run()}
 						className={editor.isActive('blockquote') ? 'is-active' : ''}
 					>
-						""
+						<i className='fa-solid fa-quote-left'></i>
 					</button>
 					<button
 						onClick={() => editor.chain().focus().toggleCodeBlock().run()}
 						className={editor.isActive('codeBlock') ? 'is-active' : ''}
 					>
-						{`</>`}
+						<i className='fa-solid fa-code'></i>
 					</button>
 					<button onClick={() => editor.chain().focus().clearNodes().run()}>
-						X
+						<i className='fa-solid fa-x'></i>
 					</button>
 				</div>
 			) : (
@@ -116,7 +116,7 @@ export default function CustomFloatingMenu({ editor }) {
 						setShowMenu(true)
 					}}
 				>
-					+
+					<i className='fa-solid fa-plus'></i>
 				</button>
 			)}
 		</FloatingMenu>

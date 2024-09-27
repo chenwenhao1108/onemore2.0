@@ -1,0 +1,101 @@
+:root {
+	--inline-height: 2rem;
+}
+
+.avatar {
+	border-radius: 50%;
+	margin: 2rem auto;
+	height: 8rem;
+	width: 8rem;
+	background-color: white;
+}
+
+.settings {
+	background-color: white;
+	margin: 3rem auto;
+	width: 70%;
+	display: flex;
+	flex-direction: column;
+	border-radius: 5px;
+	position: relative;
+	left: 1rem;
+
+	.setting-item {
+		background-color: transparent;
+		padding: 0.3rem 0.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: var(--inline-height);
+		font-weight: 600;
+		text-align: center;
+		.fa-chevron-right {
+			width: 4rem;
+		}
+	}
+
+	.theme-setting {
+		.theme-button {
+			position: relative;
+			height: var(--inline-height);
+			width: 4rem;
+			background-color: black;
+			cursor: pointer;
+			overflow: hidden;
+			border-radius: 2rem;
+
+			.slider {
+				position: absolute;
+				top: 2.5px;
+				left: 2px;
+				height: calc(var(--inline-height) - 4px);
+				width: calc(var(--inline-height) - 4px);
+				border-radius: 50%;
+				background-color: red;
+			}
+		}
+	}
+}
+
+.slide {
+	animation: slide 500ms forwards;
+}
+
+.slide-back {
+	animation: slide-back 500ms forwards;
+}
+
+@keyframes slide {
+	from {
+		left: 2px;
+	}
+	to {
+		left: calc(100% - 2rem + 2px);
+	}
+}
+
+@keyframes slide-back {
+	from {
+		translate: 100%;
+	}
+	to {
+		translate: 0;
+	}
+}
+
+.log-out-button {
+	width: 5rem;
+	height: 2rem;
+	background-color: #fce38a;
+	font-weight: 600;
+	border: none;
+	border-radius: 2.5rem;
+
+	&:hover {
+		box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+	}
+
+	&:active {
+		transform: translate(1px, 1px);
+	}
+}

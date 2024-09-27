@@ -47,6 +47,8 @@ export default function CreateDeck() {
 					title,
 					cover: covers[coverIndex],
 					duration: 0,
+					number: 0,
+					finish: 0,
 				},
 			])
 		} else {
@@ -64,6 +66,9 @@ export default function CreateDeck() {
 						title,
 						duration: 0,
 						cover: covers[coverIndex],
+						number: 0,
+						finish: 0,
+						cards: [],
 					},
 				])
 				setShowNotification(true)

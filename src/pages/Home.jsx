@@ -6,19 +6,13 @@ import { DecksContext } from '../App'
 
 export default function Home() {
 	const { decks } = useContext(DecksContext)
+	console.log(decks)
 	return (
 		<>
 			<Header />
 			<Dashboard />
 			{decks.map((deck, index) => {
-				return (
-					<Deck
-						key={index}
-						title={deck.title}
-						duration={deck.duration}
-						cover={deck.cover}
-					/>
-				)
+				return <Deck key={index} deck={deck} index={index} />
 			})}
 		</>
 	)

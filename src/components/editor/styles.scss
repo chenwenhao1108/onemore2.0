@@ -43,7 +43,7 @@
 	}
 
 	&-li {
-		list-style-type: disc; /* 或者 circle, square 等 */
+		list-style-type: disc;
 	}
 
 	&-strong {
@@ -121,6 +121,10 @@
 	padding: 0.1rem;
 	border-radius: 0.5rem;
 
+	* {
+		font-weight: 800;
+	}
+
 	button {
 		background-color: white;
 		padding: 0.275rem 0.425rem;
@@ -165,4 +169,27 @@
 		background-color: transparent;
 		border: none;
 	}
+}
+
+p.is-editor-empty:first-child::before {
+	color: var(--gray-4);
+	content: attr(data-placeholder);
+	float: left;
+	height: 0;
+	pointer-events: none;
+	font-size: large;
+	font-weight: 600;
+	font-family: 'Times New Roman', Times, serif;
+	margin-left: 2.5rem;
+}
+.is-empty::before {
+	color: var(--gray-4);
+	content: 'Add something new~';
+	float: left;
+	height: 0;
+	pointer-events: none;
+	font-size: large;
+	font-weight: 600;
+	font-family: 'Times New Roman', Times, serif;
+	margin-left: 2.5rem;
 }

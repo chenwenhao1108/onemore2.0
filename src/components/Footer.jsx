@@ -1,29 +1,28 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 export default function Footer() {
-	const [open, setOpen] = useState(false)
-
-	const menuElement = (
-		<div className='create-menu' onClick={() => setOpen(false)}>
-			<div onClick={() => setOpen(false)}></div>
-			<Link to='/create/deck'>Create Deck</Link>
-			<Link to='/create/note'>Create Card</Link>
-		</div>
-	)
 	return (
 		<footer>
-			{open ? menuElement : null}
 			<div className='footer-nav'>
-				<Link to='/' onClick={() => setOpen(false)}>
+				<NavLink
+					className={({ isActive }) => (isActive ? 'active-link' : '')}
+					to='/'
+				>
 					Home
-				</Link>
-				<a href='#' onClick={() => setOpen(!open)}>
-					Create
-				</a>
-				<Link to='user' onClick={() => setOpen(false)}>
+				</NavLink>
+				<NavLink
+					className={({ isActive }) => (isActive ? 'active-link' : '')}
+					to='/create/note'
+				>
+					Add
+				</NavLink>
+				<NavLink
+					className={({ isActive }) => (isActive ? 'active-link' : '')}
+					to='user'
+				>
 					Me
-				</Link>
+				</NavLink>
 			</div>
 		</footer>
 	)

@@ -39,8 +39,13 @@ header .site-logo {
 	font-size: 25px;
 }
 
+.site-logo span {
+	color: #ffd460;
+}
+
 header a {
-	padding: 1rem 2rem;
+	padding: 1rem 1rem;
+	font-size: large;
 }
 
 .deck {
@@ -60,8 +65,49 @@ header a {
 }
 
 .deck-info {
-	background-color: transparent;
+	width: 70%;
 	margin-left: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+	h3 {
+		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	}
+	p {
+		font-weight: 600;
+		user-select: none;
+		font-family: 'Courier New', Courier, monospace;
+		span {
+			color: #ffd460;
+			font-size: 1.2rem;
+			user-select: none;
+		}
+	}
+}
+.progress-bar {
+	background-color: #ffd460;
+	height: 10px;
+	width: 100%;
+	border-radius: 5px;
+	position: relative;
+
+	div {
+		position: absolute;
+		height: 10px;
+		border-radius: 5px;
+		background-color: #f07b3f;
+	}
+
+	span {
+		font-size: 10px;
+		font-weight: 1000;
+		position: relative;
+		top: -10px;
+		display: inline-block;
+		height: 10px;
+		user-select: none;
+	}
 }
 
 footer {
@@ -102,28 +148,6 @@ footer {
 	left: 0;
 	bottom: 0;
 	z-index: -1;
-}
-
-.avatar {
-	border-radius: 50%;
-	margin: 2rem auto;
-	height: 8rem;
-	width: 8rem;
-	background-color: white;
-}
-
-.settings {
-	background-color: white;
-	margin: 3rem auto;
-	width: 70%;
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-	border-radius: 5px;
-}
-
-.settings div {
-	background-color: transparent;
 }
 
 .create-header {
@@ -281,16 +305,18 @@ footer {
 	padding: 0.5rem 1.5rem;
 	border-radius: 5px;
 	width: 100%;
+	height: 2.5rem;
 	border: none;
 	cursor: pointer;
 	z-index: 2;
 	position: relative;
 	color: #4d4d4d;
 	font-weight: 600;
-}
+	overflow: hidden;
 
-.menu-button:hover {
-	box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+	&:hover {
+		box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+	}
 }
 
 .menu-dropdown {
@@ -302,12 +328,12 @@ footer {
 	width: 100%;
 	border: none;
 	z-index: 2;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
 
 .menu-item {
 	color: #4d4d4d;
 	font-weight: 600;
-	padding: 0.75rem;
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
@@ -315,11 +341,17 @@ footer {
 	user-select: none;
 	background-color: transparent;
 	width: 100%;
+	height: 3rem;
 	border: none;
-}
+	overflow: hidden;
 
-.menu-item:hover {
-	background-color: whitesmoke;
+	&:hover {
+		background-color: whitesmoke;
+	}
+
+	* {
+		flex-grow: 1;
+	}
 }
 
 .menu-close {
@@ -433,4 +465,12 @@ footer {
 
 .save-button:active {
 	transform: translateX(1px) translateY(1px);
+}
+
+.active-link {
+	color: #f07b3f;
+	text-decoration: underline;
+	&:hover {
+		color: #f07b3f;
+	}
 }

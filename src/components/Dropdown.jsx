@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
-export default function Dropdown({
-	menu = ['1', '2', '3'],
-	icon = null,
-	select,
-}) {
+export default function Dropdown({ menu, icon, title, defaultLink, select }) {
 	const [open, setOpen] = useState(false)
-	const [title, setTitle] = useState('')
-	useEffect(() => {
-		setTitle(menu[0])
-	}, [menu])
+
 	return (
 		<div className='menu' onClick={() => setOpen(!open)}>
 			{open && (
@@ -20,19 +13,25 @@ export default function Dropdown({
 				{title}
 			</button>
 			{open && (
-				<div className='menu-dropdown'>
-					{menu.map((item, index) => {
-						return (
-							<button
-								key={index}
-								className='menu-item'
-								onClick={() => setTitle(item)}
-							>
-								{item}
-							</button>
-						)
-					})}
-				</div>
+				<>
+					<div className='menu-dropdown'>
+						{menu.map((item, index) => {
+							return (
+								<>
+									<div
+										key={index}
+										className='menu-item'
+										onClick={() => select(index)}
+									>
+										{item}
+									</div>
+									<hr></hr>
+								</>
+							)
+						})}
+						{defaultLink && <div className='menu-item'>{defaultLink}</div>}
+					</div>
+				</>
 			)}
 		</div>
 	)

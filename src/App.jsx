@@ -1,15 +1,15 @@
 import { createContext, useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import './App.css'
+import './App.scss'
 import Home from './pages/Home'
 import Layout from './components/Layout'
-import User from './pages/User'
+import User from './pages/User/User'
 import CreateDeck from './pages/CreateDeck'
 import useUpdateEffect from './hooks/useUpdateEffect'
 import ChoiceCard from './pages/CreateCard/ChoiceCard'
-import NoteCard from './pages/CreateCard/NoteCard'
 import CreateCardLayout from './pages/CreateCard/CreateCardLayout'
-import NoteCard2 from './pages/CreateCard/NoteCard'
+import NoteCard from './pages/CreateCard/NoteCard'
+import DeckDetail from './pages/deckDetail/DeckDetail'
 
 const DecksContext = createContext()
 
@@ -17,11 +17,17 @@ function App() {
 	const [decks, setDecks] = useState([])
 
 	useEffect(() => {
-		setDecks(JSON.parse(localStorage.getItem('decks')))
+		const d = localStorage.getItem('decks')
+		if (d) {
+			setDecks(JSON.parse(d))
+			console.log(d)
+		}
 	}, [])
 
 	useUpdateEffect(() => {
-		localStorage.setItem('decks', JSON.stringify(decks))
+		if (decks && decks.length > 0) {
+			localStorage.setItem('decks', JSON.stringify(decks))
+		}
 	}, [decks])
 
 	return (
@@ -33,9 +39,10 @@ function App() {
 						<Route path='user' element={<User />} />
 						<Route path='create' element={<CreateCardLayout />}>
 							<Route path='Choice' element={<ChoiceCard />} />
-							<Route path='Note' element={<NoteCard2 />} />
+							<Route path='Note' element={<NoteCard />} />
 						</Route>
 						<Route path='create/deck' element={<CreateDeck />} />
+						<Route path='deckDetail/:id' element={<DeckDetail />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>
