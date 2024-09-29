@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import { StarterKit } from '@tiptap/starter-kit'
 
-const MyEditor = ({ content }) => {
+const FrontCard = ({ content }) => {
 	const [htmlContent, setHtmlContent] = useState('')
 
 	useEffect(() => {
@@ -25,7 +25,7 @@ const MyEditor = ({ content }) => {
 		}
 	}, [htmlContent, editor])
 
-	return <EditorContent editor={editor} className='front-card' />
+	return <EditorContent editor={editor} className='abstract-front-card' />
 }
 
-export default MyEditor
+export default FrontCard

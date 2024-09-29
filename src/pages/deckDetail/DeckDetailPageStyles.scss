@@ -3,12 +3,17 @@
 	color: white;
 	border: none;
 	border-radius: 5px;
-	height: 2rem;
+	height: 5rem;
 	width: 10rem;
-	margin: 0 auto;
+	margin: 0 1rem;
+	margin-top: auto;
+	cursor: pointer;
 
 	&:active {
 		transform: translate(1px, 1px);
+	}
+	&:hover {
+		box-shadow: 0 0 4px #ea5455;
 	}
 }
 
@@ -40,4 +45,10 @@
 	margin: 1rem 2rem;
 	display: flex;
 	gap: 1.5rem;
+}
+
+.deck-menu {
+	position: absolute;
+	right: 0;
+	top: 0;
 }

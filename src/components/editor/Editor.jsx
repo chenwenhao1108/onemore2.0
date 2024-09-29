@@ -10,12 +10,14 @@ import React, { useEffect } from 'react'
 
 import CustomFloatingMenu from './FloatingMenu'
 import CustomBubbleMenu from './BubbleMenu'
+import { useEditorContext } from '../../context/EditorContextProvider'
 
 export default ({
 	setActive: setActiveEditor,
 	setType,
 	focus = false,
 	placeholder,
+	className,
 }) => {
 	const editor = useEditor({
 		extensions: [
@@ -57,7 +59,7 @@ export default ({
 	}, [editor])
 
 	return (
-		<>
+		<div className={`editor ${className}`}>
 			<div className='undo-redo-container'>
 				<button
 					onClick={() => editor.chain().focus().undo().run()}
@@ -74,7 +76,7 @@ export default ({
 			</div>
 			{editor && <CustomBubbleMenu editor={editor} />}
 			{<CustomFloatingMenu editor={editor} />}
-			<EditorContent editor={editor} className='editor' />
-		</>
+			<EditorContent editor={editor} />
+		</div>
 	)
 }

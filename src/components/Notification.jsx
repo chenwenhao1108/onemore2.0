@@ -1,21 +1,34 @@
 import React, { useEffect, useState } from 'react'
+import { useNotificationContext } from '../context/NotificationContextProvider.jsx'
 
-export default function Notification({ status, message, onClose }) {
-	const [fadingOut, setFadingOut] = useState(false)
+export default function Notification() {
+	const [slideUp, setSlideUp] = useState(false)
+	const { showNotification, setShowNotification, message } =
+		useNotificationContext()
 
 	useEffect(() => {
-		const timer = setTimeout(() => {
-			setFadingOut(true)
-		}, 2000)
-		return () => clearTimeout(timer)
-	}, [])
+		if (showNotification) {
+			console.log(showNotification)
+			const timer = setTimeout(() => {
+				setSlideUp(true)
+			}, 2000)
+			return () => clearTimeout(timer)
+		}
+	}, [showNotification])
 
 	return (
-		<div
-			className={`notification ${status} ${fadingOut && 'fade-out'}`}
-			onAnimationEnd={onClose}
-		>
-			<p>{message}</p>
-		</div>
+		showNotification && (
+			<div
+				className={`notification ${message.status} ${slideUp && 'slide-up'}`}
+				onAnimationEnd={(e) => {
+					if (e.animationName === 'slide-up') {
+						setShowNotification(false)
+						setSlideUp(false)
+					}
+				}}
+			>
+				<p>{message.message}</p>
+			</div>
+		)
 	)
 }

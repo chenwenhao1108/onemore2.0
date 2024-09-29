@@ -9,7 +9,14 @@ const EditorContextProvider = ({ children }) => {
 
 	return (
 		<EditorContext.Provider
-			value={{ activeEditor, setActiveEditor, front, setFront, back, setBack }}
+			value={{
+				activeEditor,
+				setActiveEditor,
+				front,
+				setFront,
+				back,
+				setBack,
+			}}
 		>
 			{children}
 		</EditorContext.Provider>

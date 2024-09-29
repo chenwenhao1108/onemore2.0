@@ -49,12 +49,13 @@ header a {
 }
 
 .deck {
-	width: 80%;
+	width: 90%;
 	background-color: white;
 	margin: 2rem auto;
 	border-radius: 5px;
 	display: flex;
 	padding: 1rem 1rem;
+	position: relative;
 }
 
 .deck-cover {
@@ -268,18 +269,28 @@ footer {
 	width: 50%;
 	border-radius: 8px;
 	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+	animation: slide-down 300ms ease forwards;
 }
 
-.fade-out {
-	animation: fadeOut 0.5s forwards;
-}
-
-@keyframes fadeOut {
+@keyframes slide-down {
 	from {
-		opacity: 1;
+		height: 0;
 	}
 	to {
-		opacity: 0;
+		height: 3rem;
+	}
+}
+
+.slide-up {
+	animation: slide-up 0.3s forwards;
+}
+
+@keyframes slide-up {
+	from {
+		height: 3rem;
+	}
+	to {
+		height: 0;
 	}
 }
 
@@ -301,11 +312,11 @@ footer {
 }
 
 .menu-button {
-	background-color: white;
-	padding: 0.5rem 1.5rem;
+	background-color: transparent;
+	padding: 0.2rem 0.5rem;
 	border-radius: 5px;
-	width: 100%;
-	height: 2.5rem;
+	width: 50%;
+	height: 2rem;
 	border: none;
 	cursor: pointer;
 	z-index: 2;
@@ -332,11 +343,12 @@ footer {
 }
 
 .menu-item {
+	padding: 0, 0.5rem;
 	color: #4d4d4d;
 	font-weight: 600;
 	cursor: pointer;
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 	user-select: none;
 	background-color: transparent;
@@ -344,6 +356,7 @@ footer {
 	height: 3rem;
 	border: none;
 	overflow: hidden;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 
 	&:hover {
 		background-color: whitesmoke;
@@ -366,9 +379,27 @@ footer {
 }
 
 .create-card-header {
-	margin: 1rem 4rem;
+	margin: 1rem 0;
 	display: flex;
-	gap: 1rem;
+	justify-content: space-between;
+
+	.menus {
+		display: flex;
+		gap: 1rem;
+	}
+	.save-button {
+		font-size: 1.5rem;
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+	}
+
+	.save-button:active {
+		transform: translateX(1px) translateY(1px);
+	}
+	.save-button:hover {
+		transform: translateX(1px) translateY(1px);
+	}
 }
 
 .note-card {
@@ -418,7 +449,6 @@ footer {
 	gap: 2rem;
 }
 
-.create-card-footer button,
 .font-bar button {
 	background-color: white;
 	height: 3rem;
@@ -427,16 +457,8 @@ footer {
 	border-radius: 50%;
 }
 
-.create-card-footer button:hover {
-	box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-}
-
-.create-card-footer button:active {
-	border: 1px solid orange;
-}
-
 .create-card-page {
-	margin-bottom: 4rem;
+	margin: 1rem 3rem;
 }
 
 .font-bar * {
@@ -453,18 +475,8 @@ footer {
 }
 
 .note-page {
-	background-color: white;
-	height: 83vh;
-}
-
-.save-button {
-	font-size: 1.5rem;
-	background-color: transparent;
-	border: none;
-}
-
-.save-button:active {
-	transform: translateX(1px) translateY(1px);
+	height: 80vh;
+	border-radius: 10px;
 }
 
 .active-link {
@@ -472,5 +484,169 @@ footer {
 	text-decoration: underline;
 	&:hover {
 		color: #f07b3f;
+	}
+}
+
+.deck-tag-setting {
+	display: flex;
+	flex-shrink: 1;
+	align-items: center;
+	margin: 1rem auto;
+	width: 80%;
+	gap: 1rem;
+	.deck-tag-input {
+		height: 2rem;
+		width: 7rem;
+		border: none;
+		border-radius: 5px;
+		text-align: left;
+		padding-left: 1rem;
+		&:focus {
+			outline: none;
+			box-shadow: 0 0 4px #ea5455;
+		}
+	}
+	.deck-tag-color-button-container {
+		width: 10rem;
+		display: flex;
+		font-size: 1.5rem;
+		gap: 0.5rem;
+		.tag-color-button {
+			height: fit-content;
+			border-radius: 50%;
+			line-height: 1;
+			display: inline-block;
+			&:hover {
+				box-shadow: 0 0 4px #ea5455;
+			}
+		}
+		.selected-color {
+			transform: scale(1.2);
+			box-shadow: 0 0 4px #ea5455;
+		}
+	}
+	.add-deck-tag-button {
+		border: none;
+		border-radius: 1rem;
+		height: 2rem;
+		width: 4rem;
+		background-color: #ffd460;
+		font-weight: 600;
+		&:hover {
+			box-shadow: 0 0 4px #ea5455;
+		}
+		&:active {
+			transform: translate(1px, 1px);
+		}
+	}
+}
+
+.tags-container {
+	display: flex;
+	width: 80%;
+	margin: 1rem auto;
+	gap: 1rem;
+	.tag {
+		padding: 0.2rem 0.5rem;
+		font-weight: 500;
+		color: black;
+		border-radius: 5px;
+		user-select: none;
+		position: relative;
+		&:hover {
+			box-shadow: 0 0 4px #ea5455;
+			&::after {
+				content: '×';
+				position: absolute;
+				top: 0;
+				right: 2px;
+				font-size: 8px;
+				color: black;
+			}
+		}
+	}
+}
+.tag {
+	padding: 0.2rem;
+	margin: 0 0.2rem;
+	width: min-content;
+	border-radius: 5px;
+	white-space: nowrap;
+	user-select: none;
+	font-weight: 500;
+	font-family: 'Times New Roman', Times, serif;
+}
+.upload-image-container {
+	position: absolute;
+	padding: 1rem;
+	border-radius: 5px;
+	z-index: 4;
+	width: 15rem;
+	height: 5rem;
+	top: calc(50% - 7.5rem);
+	left: calc(50% - 7.5rem);
+	input {
+		height: 2rem;
+		border: none;
+		border-radius: 5px;
+		text-align: left;
+		padding-left: 1rem;
+		margin: 1rem;
+		&:focus {
+			outline: none;
+			box-shadow: 0 0 4px #ea5455;
+		}
+	}
+	button {
+		border: none;
+		border-radius: 1rem;
+		height: 2rem;
+		width: 4rem;
+		margin-left: 0.5rem;
+		background-color: #ffd460;
+		font-weight: 600;
+		&:hover {
+			box-shadow: 0 0 4px #ea5455;
+		}
+		&:active {
+			transform: translate(1px, 1px);
+		}
+	}
+}
+
+.close-margin {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(8px);
+	height: 100%;
+	width: 100%;
+	z-index: 3;
+}
+
+.editor {
+	border-radius: 10px;
+	overflow: hidden;
+	height: 50%;
+	border: 1px black solid;
+	margin: 1rem 0;
+	background-color: transparent;
+}
+
+.deck-info-tags-container {
+	display: flex;
+	max-width: 8rem;
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
+.home-page-tags-container {
+	width: 100%;
+	display: flex;
+	overflow-x: auto;
+	white-space: nowrap;
+	.tag {
+		width: min-content;
 	}
 }

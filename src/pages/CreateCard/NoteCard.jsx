@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Editor from '../../components/editor/Editor'
 import { useEditorContext } from '../../context/EditorContextProvider'
 
@@ -12,7 +12,7 @@ export default function NoteCard() {
 				focus
 				placeholder='Here is the front of your card'
 			/>
-			<hr></hr>
+
 			<Editor
 				setActive={setActiveEditor}
 				setType={setBack}

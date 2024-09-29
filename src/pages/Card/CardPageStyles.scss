@@ -1,0 +1,76 @@
+.card-page {
+	height: 90vh;
+	padding: 1.5rem 2rem;
+	.card-page-title {
+		display: flex;
+		align-items: center;
+		margin-bottom: 0.5rem;
+	}
+
+	.card-page-front-card {
+		margin-bottom: 1rem;
+	}
+}
+.card-page-button-container {
+	padding: 1rem 0;
+}
+.level-buttons-container {
+	display: flex;
+	width: min-content;
+	gap: 1rem;
+	margin: 0 auto;
+	button {
+		height: 3rem;
+		width: 5rem;
+		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+		border: none;
+		border-radius: 5px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		&:hover {
+			box-shadow: 0 0 8px rgba($color: #3ec1d3, $alpha: 0.5);
+		}
+		&:active {
+			transform: scale(0.95);
+		}
+	}
+	.hard-button {
+		background-color: #ff165d;
+	}
+	.good-button {
+		background-color: #ff9a00;
+	}
+	.easy-button {
+		background-color: #3ec1d3;
+	}
+}
+
+.done-page {
+	margin: 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.show-back-button {
+	height: 3rem;
+	width: 5rem;
+	margin: 0 auto;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	border: none;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #3ec1d3;
+	&:hover {
+		box-shadow: 0 0 8px rgba($color: #3ec1d3, $alpha: 0.5);
+	}
+	&:active {
+		transform: scale(0.95);
+	}
+}
