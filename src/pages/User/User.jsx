@@ -1,38 +1,40 @@
 import './styles.scss'
 
 import React, { useState } from 'react'
+import { useTheme } from '../../context/ThemeContext'
+import { useUserContext } from '../../context/UserContextProvider'
 
-export default function User({ username = 'Kurt' }) {
-	const [lightTheme, setLightTheme] = useState(true)
-	console.log(lightTheme)
+export default function User() {
+	const { theme, toggleTheme } = useTheme()
+	const { logout, user } = useUserContext()
+
 	return (
 		<>
 			<div>
-				<img src='../src/pics/sunrise.png' className='avatar' />
+				<img src={user.avatar} className='avatar' />
 			</div>
-			<h3 className='username'>{username}</h3>
+			<h3 className='username'>{user.username}</h3>
 			<div className='settings'>
 				<div className='user-center setting-item'>
 					<i className='fa-solid fa-user user-icon'></i>
 
 					<p>User center</p>
-					<i class='fa-solid fa-chevron-right'></i>
+					<i className='fa-solid fa-chevron-right'></i>
 				</div>
 				<hr></hr>
 				<div className='theme-setting setting-item'>
 					<i className='fa-solid fa-sun'></i>
 					<p>Theme</p>
-					<div
-						className='theme-button'
-						onClick={() => setLightTheme(!lightTheme)}
-					>
+					<div className='theme-button' onClick={toggleTheme}>
 						<div
-							className={`slider ${lightTheme ? 'slide-back' : 'slide'}`}
+							className={`slider ${theme === 'light' ? 'slide-back' : 'slide'}`}
 						></div>
 					</div>
 				</div>
 			</div>
-			<button className='log-out-button'>Log Out</button>
+			<button className='log-out-button' onClick={logout}>
+				Log Out
+			</button>
 		</>
 	)
 }

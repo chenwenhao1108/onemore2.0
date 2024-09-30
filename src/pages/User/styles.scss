@@ -7,11 +7,10 @@
 	margin: 2rem auto;
 	height: 8rem;
 	width: 8rem;
-	background-color: white;
 }
 
 .settings {
-	background-color: white;
+	background-color: var(--primary-color);
 	margin: 3rem auto;
 	width: 70%;
 	display: flex;
@@ -39,7 +38,7 @@
 			position: relative;
 			height: var(--inline-height);
 			width: 4rem;
-			background-color: black;
+			background-color: var(--background-color);
 			cursor: pointer;
 			overflow: hidden;
 			border-radius: 2rem;
@@ -51,7 +50,7 @@
 				height: calc(var(--inline-height) - 4px);
 				width: calc(var(--inline-height) - 4px);
 				border-radius: 50%;
-				background-color: red;
+				background-color: var(--primary-color);
 			}
 		}
 	}

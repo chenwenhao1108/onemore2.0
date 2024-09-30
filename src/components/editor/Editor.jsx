@@ -7,10 +7,10 @@ import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Placeholder from '@tiptap/extension-placeholder'
 import React, { useEffect } from 'react'
+import FloatingMenu from '@tiptap/extension-floating-menu'
 
 import CustomFloatingMenu from './FloatingMenu'
 import CustomBubbleMenu from './BubbleMenu'
-import { useEditorContext } from '../../context/EditorContextProvider'
 
 export default ({
 	setActive: setActiveEditor,

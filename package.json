@@ -10,18 +10,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "@tiptap/extension-blockquote": "^2.7.3",
     "@tiptap/extension-code-block": "^2.7.3",
     "@tiptap/extension-color": "^2.7.2",
+    "@tiptap/extension-floating-menu": "^2.7.4",
     "@tiptap/extension-history": "^2.7.3",
     "@tiptap/extension-placeholder": "^2.7.4",
     "@tiptap/pm": "^2.7.2",
     "@tiptap/react": "^2.7.2",
     "@tiptap/starter-kit": "^2.7.2",
+    "firebase": "^10.13.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
-    "uuid": "^10.0.0"
+    "tippy.js": "^6.3.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

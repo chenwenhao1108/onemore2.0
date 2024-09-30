@@ -1,15 +1,15 @@
 import './DeckDetailPageStyles.scss'
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { DecksContext } from '../../App'
 import FrontCard from '../../components/FrontCard/FrontCard'
 import Dropdown from '../../components/Dropdown'
 import useUpdateEffect from '../../hooks/useUpdateEffect'
+import { useDecksContext } from '../../context/DecksContextProvider'
 
 export default function DeckDetail() {
 	const { id } = useParams()
-	const { decks, setDecks } = useContext(DecksContext)
+	const { decks, setDecks } = useDecksContext()
 	const [deck, setDeck] = useState(null)
 	const [cards, setCards] = useState([])
 	const [allCards, setAllCards] = useState([])

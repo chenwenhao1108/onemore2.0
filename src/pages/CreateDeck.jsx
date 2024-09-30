@@ -1,9 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import Notification from '../components/Notification'
-import { DecksContext } from '../App'
-import { v4 } from 'uuid'
-import { useNotificationContext } from '../context/NotificationContextProvider.jsx'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useDecksContext } from '../context/DecksContextProvider.jsx'
 
 export default function CreateDeck() {
 	const [title, setTitle] = useState('')
@@ -14,24 +11,19 @@ export default function CreateDeck() {
 	const [colorIndex, setColorIndex] = useState()
 	const [imgUrl, setImgUrl] = useState('')
 	const [upload, setUpload] = useState(false)
+	const [deck, setDeck] = useState(null)
+	const [disableButton, setDisableButton] = useState(true)
 
-	const { decks, setDecks } = useContext(DecksContext)
-
-	const navigate = useNavigate()
+	const { createDeck } = useDecksContext()
 
 	const covers = [
-		'../src/pics/cafe.png',
-		'../src/pics/girl with a pearl earring.png',
-		'../src/pics/sleeping lily.png',
-		'../src/pics/sunflower.png',
-		'../src/pics/sunrise.png',
-		'../src/pics/The Starry Night.png',
+		'/pics/cafe.png',
+		'/pics/girl with a pearl earring.png',
+		'/pics/sleeping lily.png',
+		'/pics/sunflower.png',
+		'/pics/sunrise.png',
+		'/pics/The Starry Night.png',
 	]
-
-	const id = v4()
-
-	const { showNotification, setShowNotification, message, setMessage } =
-		useNotificationContext()
 
 	function addTag(e) {
 		setTags((p) => {
@@ -45,65 +37,28 @@ export default function CreateDeck() {
 		setImgUrl(covers[index])
 	}
 
-	function createDeck() {
-		if (!title) {
-			setShowNotification(true)
-			setMessage({
-				message: "Title can't be empty!",
-				status: 'error',
-			})
-			return
+	useEffect(() => {
+		setDeck({
+			title,
+			duration: 0,
+			cover: imgUrl,
+			tags,
+			number: 0,
+			finish: 0,
+		})
+		if (title && imgUrl) {
+			setDisableButton(false)
 		}
-		if (!imgUrl) {
-			setShowNotification(true)
-			setMessage({
-				message: "Cover can't be empty!",
-				status: 'error',
-			})
-			return
-		}
-		if (!decks) {
-			return
-		} else {
-			const titles = decks.map((deck) => deck?.title)
-			if (titles.includes(title)) {
-				setShowNotification(true)
-				setMessage({
-					message: 'Title already exists!',
-					status: 'error',
-				})
-			} else {
-				setDecks((preDecks) => [
-					...preDecks,
-					{
-						id,
-						title,
-						duration: 0,
-						cover: imgUrl,
-						tags,
-						number: 0,
-						finish: 0,
-						cards: [],
-					},
-				])
-				setShowNotification(true)
-				setMessage({
-					message: 'Deck is created!',
-					status: 'success',
-				})
-				navigate('/create/note', { state: { deckId: id } })
-			}
-		}
-	}
+	}, [title, imgUrl, tags])
 
 	return (
 		<>
 			<div className='create-header'>
 				<Link to='/'>⬅back</Link>
 				<h2>Create new deck</h2>
-				<a href='#' onClick={createDeck}>
+				<button disabled={disableButton} onClick={() => createDeck(deck)}>
 					Create
-				</a>
+				</button>
 			</div>
 
 			<input

@@ -8,10 +8,9 @@ export default function Notification() {
 
 	useEffect(() => {
 		if (showNotification) {
-			console.log(showNotification)
 			const timer = setTimeout(() => {
 				setSlideUp(true)
-			}, 2000)
+			}, 2500)
 			return () => clearTimeout(timer)
 		}
 	}, [showNotification])

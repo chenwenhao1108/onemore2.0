@@ -1,15 +1,14 @@
 import './CardPageStyles.scss'
 
 import React, { useEffect, useState } from 'react'
-import { DecksContext } from '../../App'
-import { useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useEditor, EditorContent } from '@tiptap/react'
 import { StarterKit } from '@tiptap/starter-kit'
 import useUpdateEffect from '../../hooks/useUpdateEffect'
+import { useDecksContext } from '../../context/DecksContextProvider'
 
 export default function Card() {
-	const { decks, setDecks } = useContext(DecksContext)
+	const { decks, setDecks } = useDecksContext()
 	const { id } = useParams()
 	const [deckTitle, setDeckTitle] = useState(null)
 	const [cardsToLearn, setCardsToLearn] = useState([])

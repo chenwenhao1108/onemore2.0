@@ -1,19 +1,20 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Header from '../components/Header'
 import Deck from '../components/Deck'
 import Dashboard from '../components/Dashboard'
-import { DecksContext } from '../App'
+import { useDecksContext } from '../context/DecksContextProvider'
 
 export default function Home() {
-	const { decks } = useContext(DecksContext)
+	const { decks } = useDecksContext()
 
 	return (
 		<>
 			<Header />
 			<Dashboard />
-			{decks.map((deck, index) => {
-				return <Deck key={index} deck={deck} id={deck.id} />
-			})}
+			{decks &&
+				decks.map((deck, index) => {
+					return <Deck key={index} deck={deck} id={deck.id} />
+				})}
 		</>
 	)
 }

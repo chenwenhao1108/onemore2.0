@@ -19,7 +19,28 @@ export default function CustomFloatingMenu({ editor }) {
 	return (
 		<FloatingMenu
 			editor={editor}
-			tippyOptions={{ duration: 100 }}
+			tippyOptions={{
+				duration: 100,
+				followCursor: true,
+				placement: 'top',
+				flip: true,
+				popperOptions: {
+					modifiers: [
+						{
+							name: 'flip',
+							options: {
+								fallbackPlacements: ['bottom', 'left', 'right'],
+							},
+						},
+						{
+							name: 'preventOverflow',
+							options: {
+								padding: 10,
+							},
+						},
+					],
+				},
+			}}
 			shouldShow={({ state }) => {
 				return state.selection.$cursor && focused
 			}}

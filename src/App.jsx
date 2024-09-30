@@ -1,59 +1,55 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext } from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import './App.scss'
 import Home from './pages/Home'
 import Layout from './components/Layout'
 import User from './pages/User/User'
 import CreateDeck from './pages/CreateDeck'
-import useUpdateEffect from './hooks/useUpdateEffect'
 import ChoiceCard from './pages/CreateCard/ChoiceCard'
 import CreateCardLayout from './pages/CreateCard/CreateCardLayout'
 import NoteCard from './pages/CreateCard/NoteCard'
 import DeckDetail from './pages/deckDetail/DeckDetail'
 import Card from './pages/Card/Card'
-import Notification from './components/Notification'
 import { NotificationContextProvider } from './context/NotificationContextProvider.jsx'
-
-const DecksContext = createContext()
+import { ThemeProvider } from './context/ThemeContext.jsx'
+import { DecksContextProvider } from './context/DecksContextProvider.jsx'
+import A404Page from './pages/A404Page.jsx'
+import LogIn from './pages/LogIn.jsx'
+import Register from './pages/Register.jsx'
+import { UserContextProvider } from './context/UserContextProvider.jsx'
+import AuthRequired from './components/AuthRequired.jsx'
 
 function App() {
-	const [decks, setDecks] = useState([])
-
-	useEffect(() => {
-		const d = localStorage.getItem('decks')
-		if (d) {
-			setDecks(JSON.parse(d))
-		}
-	}, [])
-
-	useUpdateEffect(() => {
-		localStorage.setItem('decks', JSON.stringify(decks))
-		console.log('decks updated: ', decks)
-	}, [decks])
-
 	return (
-		<DecksContext.Provider value={{ decks, setDecks }}>
+		<BrowserRouter>
 			<NotificationContextProvider>
-				<BrowserRouter>
-					<Routes>
-						<Route path='/' element={<Layout />}>
-							<Route index element={<Home />} />
-							<Route path='user' element={<User />} />
-							<Route path='create' element={<CreateCardLayout />}>
-								<Route path='Choice' element={<ChoiceCard />} />
-								<Route path='Note' element={<NoteCard />} />
-							</Route>
-							<Route path='create/deck' element={<CreateDeck />} />
-							<Route path='deckDetail/:id' element={<DeckDetail />} />
-							<Route path='cards/:id' element={<Card />} />
-							<Route path='*' element={<Link to='/'>back to Home</Link>} />
-						</Route>
-					</Routes>
-				</BrowserRouter>
+				<UserContextProvider>
+					<DecksContextProvider>
+						<ThemeProvider>
+							<Routes>
+								<Route path='/' element={<Layout />}>
+									<Route element={<AuthRequired />}>
+										<Route index element={<Home />} />
+										<Route path='user' element={<User />} />
+										<Route path='create' element={<CreateCardLayout />}>
+											<Route path='Choice' element={<ChoiceCard />} />
+											<Route path='Note' element={<NoteCard />} />
+										</Route>
+										<Route path='create/deck' element={<CreateDeck />} />
+										<Route path='deckDetail/:id' element={<DeckDetail />} />
+										<Route path='cards/:id' element={<Card />} />
+									</Route>
+								</Route>
+								<Route path='/login' element={<LogIn />} />
+								<Route path='/register' element={<Register />} />
+								<Route path='*' element={<A404Page />} />
+							</Routes>
+						</ThemeProvider>
+					</DecksContextProvider>
+				</UserContextProvider>
 			</NotificationContextProvider>
-		</DecksContext.Provider>
+		</BrowserRouter>
 	)
 }
 
 export default App
-export { DecksContext }
