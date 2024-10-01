@@ -11,7 +11,7 @@ export default function CreateCardHeader() {
 	const [deckId, setDeckId] = useState()
 	const { decks, createCard } = useDecksContext()
 	const { front, back } = useEditorContext()
-	const { setMessage, setShowNotification } = useNotificationContext()
+	const { setNotification } = useNotificationContext()
 	const location = useLocation()
 	const state = location.state
 
@@ -55,8 +55,7 @@ export default function CreateCardHeader() {
 	const uploadNewCard = async () => {
 		if (front && back) {
 			if (front.isEmpty || back.isEmpty) {
-				setShowNotification(true)
-				setMessage({
+				setNotification({
 					message: 'Can not have empty area!',
 					status: 'error',
 				})
@@ -73,8 +72,7 @@ export default function CreateCardHeader() {
 					front.commands.setContent('')
 					back.commands.setContent('')
 				} else {
-					setShowNotification(true)
-					setMessage({
+					setNotification({
 						status: 'error',
 						message: 'Please select a deck',
 					})

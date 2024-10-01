@@ -3,6 +3,7 @@ import './styles.scss'
 import React, { useState } from 'react'
 import { useTheme } from '../../context/ThemeContext'
 import { useUserContext } from '../../context/UserContextProvider'
+import { Link } from 'react-router-dom'
 
 export default function User() {
 	const { theme, toggleTheme } = useTheme()
@@ -15,12 +16,12 @@ export default function User() {
 			</div>
 			<h3 className='username'>{user.username}</h3>
 			<div className='settings'>
-				<div className='user-center setting-item'>
+				<Link to='/user/center' className='user-center setting-item'>
 					<i className='fa-solid fa-user user-icon'></i>
 
 					<p>User center</p>
 					<i className='fa-solid fa-chevron-right'></i>
-				</div>
+				</Link>
 				<hr></hr>
 				<div className='theme-setting setting-item'>
 					<i className='fa-solid fa-sun'></i>

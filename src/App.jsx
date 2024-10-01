@@ -18,6 +18,7 @@ import LogIn from './pages/LogIn.jsx'
 import Register from './pages/Register.jsx'
 import { UserContextProvider } from './context/UserContextProvider.jsx'
 import AuthRequired from './components/AuthRequired.jsx'
+import UserCenter from './pages/User/UserCenter.jsx'
 
 function App() {
 	return (
@@ -31,6 +32,7 @@ function App() {
 									<Route element={<AuthRequired />}>
 										<Route index element={<Home />} />
 										<Route path='user' element={<User />} />
+										<Route path='user/center' element={<UserCenter />} />
 										<Route path='create' element={<CreateCardLayout />}>
 											<Route path='Choice' element={<ChoiceCard />} />
 											<Route path='Note' element={<NoteCard />} />

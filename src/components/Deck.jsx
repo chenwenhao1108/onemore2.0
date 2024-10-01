@@ -22,7 +22,8 @@ export default function Deck({ deck, finish = 0, number = 0, id }) {
 						})}
 					</div>
 					<p>
-						Duration: <span>{deck.duration}</span> minutes
+						Duration: <span>{(deck.duration / 1000 / 60).toFixed(1)}</span>{' '}
+						minutes
 					</p>
 					<div className='progress-bar'>
 						<div style={{ width: `${finish ? finish / number : '5px'}` }}></div>

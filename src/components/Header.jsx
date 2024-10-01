@@ -10,7 +10,7 @@ export default function Header() {
 			<a href='#'>
 				<i className='fa-solid fa-magnifying-glass'></i>
 			</a>
-			<a href='#'>User</a>
+			<Link to='/create/deck'>New Deck</Link>
 		</header>
 	)
 }

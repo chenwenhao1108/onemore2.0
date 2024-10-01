@@ -3,30 +3,31 @@ import { useNotificationContext } from '../context/NotificationContextProvider.j
 
 export default function Notification() {
 	const [slideUp, setSlideUp] = useState(false)
-	const { showNotification, setShowNotification, message } =
-		useNotificationContext()
+	const { notification, setNotification } = useNotificationContext()
 
 	useEffect(() => {
-		if (showNotification) {
+		if (notification) {
 			const timer = setTimeout(() => {
 				setSlideUp(true)
 			}, 2500)
 			return () => clearTimeout(timer)
 		}
-	}, [showNotification])
+	}, [notification])
 
 	return (
-		showNotification && (
+		notification && (
 			<div
-				className={`notification ${message.status} ${slideUp && 'slide-up'}`}
+				className={`notification ${notification.status} ${
+					slideUp && 'slide-up'
+				}`}
 				onAnimationEnd={(e) => {
 					if (e.animationName === 'slide-up') {
-						setShowNotification(false)
+						setNotification(null)
 						setSlideUp(false)
 					}
 				}}
 			>
-				<p>{message.message}</p>
+				<p>{notification.message}</p>
 			</div>
 		)
 	)

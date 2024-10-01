@@ -1,23 +1,27 @@
 import './CardPageStyles.scss'
 
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useEditor, EditorContent } from '@tiptap/react'
 import { StarterKit } from '@tiptap/starter-kit'
-import useUpdateEffect from '../../hooks/useUpdateEffect'
 import { useDecksContext } from '../../context/DecksContextProvider'
+import LoadingPage from '../LoadingPage'
+import { useUserContext } from '../../context/UserContextProvider'
 
 export default function Card() {
-	const { decks, setDecks } = useDecksContext()
-	const { id } = useParams()
-	const [deckTitle, setDeckTitle] = useState(null)
+	const { getCardsToLearn, updateCard, updateDeck } = useDecksContext()
+	const { user, updateUserMessage } = useUserContext()
+	const [deck, setDeck] = useState(null)
 	const [cardsToLearn, setCardsToLearn] = useState([])
 	const [currentIndex, setCurrentIndex] = useState(0)
 	const [frontHtmlContent, setFrontHtmlContent] = useState('')
 	const [backHtmlContent, setBackHtmlContent] = useState('')
+	const [startTime, setStartTime] = useState(null)
 	const [showBack, setShowBack] = useState(false)
-	const [cardIndex, setCardIndex] = useState([])
 	const [done, setDone] = useState(false)
+	const [loading, setLoading] = useState(true)
+
+	const location = useLocation()
 
 	const front = useEditor({
 		extensions: [StarterKit],
@@ -41,50 +45,64 @@ export default function Card() {
 	}, [frontHtmlContent, backHtmlContent])
 
 	useEffect(() => {
-		if (Array.isArray(decks) && decks.length > 0) {
-			decks.forEach((deck) => {
-				if (deck.id === id) {
-					const now = new Date()
-					setCardsToLearn(
-						deck.cards.filter((card, index) => {
-							if (now >= new Date(card.nextTime) && card.correctTimes < 7) {
-								setCardIndex((preCardIndex) => {
-									if (!preCardIndex.includes(index)) {
-										return [...preCardIndex, index]
-									}
-									return preCardIndex
-								})
-								return true
-							}
-							return false
-						})
-					)
-					setDeckTitle(deck.title)
-				}
-			})
+		const getCardsData = async () => {
+			const cardsData = await getCardsToLearn(deck.id)
+			if (cardsData.length > 0) {
+				setCardsToLearn(cardsData)
+				setStartTime(new Date())
+			} else {
+				setDone(true)
+			}
+			setLoading(false)
 		}
-	}, [decks])
+		if (deck) {
+			getCardsData()
+		}
+	}, [deck])
 
 	useEffect(() => {
+		const state = location.state
+		if (state) {
+			setDeck(state.deck)
+		}
+		console.log(state)
+	}, [location])
+
+	useEffect(() => {
+		console.log(cardsToLearn)
 		if (cardsToLearn.length > 0 && currentIndex < cardsToLearn.length) {
 			setFrontHtmlContent(cardsToLearn[currentIndex].front)
 			setBackHtmlContent(cardsToLearn[currentIndex].back)
 		}
 	}, [cardsToLearn])
 
-	useUpdateEffect(() => {
-		if (done) {
-			setDecks((preDecks) =>
-				preDecks.map((deck) => {
-					if (deck.id === id) {
-						const newCards = [...deck.cards]
-						cardIndex.forEach((cardIndex, index) => {
-							newCards[cardIndex] = cardsToLearn[index]
-						})
-						return { ...deck, cards: newCards }
-					} else return deck
-				})
-			)
+	useEffect(() => {
+		if (done && cardsToLearn.length > 0) {
+			const endTime = new Date()
+			const duration = endTime - startTime
+			const newDeck = {
+				...deck,
+				duration,
+			}
+			updateDeck(deck.id, newDeck)
+			const isoEndTime = endTime.toISOString().split('T')[0]
+
+			let sevenDaysLearningTime = {}
+			if (isoEndTime in user.sevenDaysLearningTime) {
+				sevenDaysLearningTime = {
+					...user.sevenDaysLearningTime,
+					isoEndTime: user.sevenDaysLearningTime[isoEndTime] + duration,
+				}
+			} else {
+				sevenDaysLearningTime = {
+					...user.sevenDaysLearningTime,
+					isoEndTime: duration,
+				}
+			}
+			const newUser = {
+				...user,
+				sevenDaysLearningTime,
+			}
 		}
 	}, [done])
 
@@ -92,32 +110,42 @@ export default function Card() {
 		if (currentIndex + 1 === cardsToLearn.length) {
 			setDone(true)
 		}
+		let correctTimes = cardsToLearn[currentIndex].correctTimes
+		if (min === 2) {
+			correctTimes = cardsToLearn[currentIndex].correctTimes - 1
+		} else if (min === 14400) {
+			correctTimes = cardsToLearn[currentIndex].correctTimes + 1
+		}
 
-		setCardsToLearn((preCards) =>
-			preCards.map((card, index) => {
-				if (index === currentIndex) {
-					let nextTime = new Date()
-
-					nextTime = nextTime.setTime(nextTime.getTime() + min * 60 * 1000)
-
-					return { ...card, nextTime, correctTimes: card.correctTimes + 1 }
-				} else return card
-			})
-		)
-
+		const now = new Date()
+		const nextTime = now.setTime(now.getTime() + min * 60 * 1000)
+		const card = {
+			...cardsToLearn[currentIndex],
+			correctTimes,
+			nextTime,
+		}
+		updateCard(deck.id, cardsToLearn[currentIndex].id, card)
 		setCurrentIndex((p) => p + 1)
 	}
 
-	return done ? (
+	return loading ? (
+		<LoadingPage />
+	) : done ? (
 		<div className='done-page'>
-			<h1>Congrats! You went through all cards!</h1>
-			<Link to={`/cards/${id}`}>Go through again</Link>
+			<h1>Congrats!🥳</h1>
+			<h3>You went through all cards!</h3>
+			<div>
+				<Link to={'/create/note'}>Add more cards</Link>
+				<Link to={'/'} state={{ deckId: deck.id }}>
+					Back to home
+				</Link>
+			</div>
 		</div>
 	) : (
 		<div className='card-page'>
 			<div className='card-page-title'>
 				<i className='fa-solid fa-book'></i>
-				{deckTitle}
+				{deck.title}
 			</div>
 			<EditorContent editor={front} className='card-page-front-card' />
 			<EditorContent

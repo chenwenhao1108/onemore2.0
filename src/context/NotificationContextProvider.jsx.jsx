@@ -3,16 +3,13 @@ import React, { createContext, useContext, useState } from 'react'
 const NotificationContext = createContext()
 
 const NotificationContextProvider = ({ children }) => {
-	const [message, setMessage] = useState(null)
-	const [showNotification, setShowNotification] = useState(false)
+	const [notification, setNotification] = useState(null)
 
 	return (
 		<NotificationContext.Provider
 			value={{
-				message,
-				showNotification,
-				setShowNotification,
-				setMessage,
+				notification,
+				setNotification,
 			}}
 		>
 			{children}

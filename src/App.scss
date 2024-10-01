@@ -123,6 +123,7 @@ header a {
 		display: inline-block;
 		height: 10px;
 		user-select: none;
+		color: #222831;
 	}
 }
 
@@ -267,9 +268,10 @@ footer {
 
 .notification {
 	position: fixed;
-	top: 3rem;
+	top: 0;
 	left: 50%;
 	transform: translateX(-50%);
+	color: #222831;
 	font-size: larger;
 	font-weight: 600;
 	font-family: Kanit;
@@ -277,7 +279,7 @@ footer {
 	justify-content: center;
 	align-items: center;
 	height: 3rem;
-	width: 50%;
+	width: 110%;
 	border-radius: 8px;
 	box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
 	animation: slide-down 300ms ease forwards;
@@ -565,6 +567,7 @@ footer {
 	user-select: none;
 	font-weight: 500;
 	font-family: 'Times New Roman', Times, serif;
+	color: black;
 }
 .upload-image-container {
 	position: absolute;
@@ -617,7 +620,7 @@ footer {
 
 .editor {
 	border-radius: 10px;
-	overflow: hidden;
+	overflow: auto;
 	height: 50%;
 	border: 1px black solid;
 	margin: 1rem 0;
@@ -681,5 +684,30 @@ footer {
 		&:active {
 			transform: translate(1px, 1px);
 		}
+	}
+}
+
+.loading-page {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	i {
+		font-size: 7rem;
+		animation: rotate 1.5s infinite;
+	}
+	h1 {
+		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+			sans-serif;
+	}
+}
+
+@keyframes rotate {
+	from {
+		rotate: 0deg;
+	}
+	to {
+		rotate: 360deg;
 	}
 }

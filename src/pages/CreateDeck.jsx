@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDecksContext } from '../context/DecksContextProvider.jsx'
+import { useLocation } from 'react-router-dom'
 
 export default function CreateDeck() {
 	const [title, setTitle] = useState('')
-	const [coverIndex, setCoverIndex] = useState(null)
 	const [tagText, setTagText] = useState('')
 	const [tagColor, setTagColor] = useState('')
 	const [tags, setTags] = useState([])
@@ -13,8 +13,10 @@ export default function CreateDeck() {
 	const [upload, setUpload] = useState(false)
 	const [deck, setDeck] = useState(null)
 	const [disableButton, setDisableButton] = useState(true)
+	const location = useLocation()
+	const state = location.state
 
-	const { createDeck } = useDecksContext()
+	const { createDeck, updateDeck } = useDecksContext()
 
 	const covers = [
 		'/pics/cafe.png',
@@ -32,10 +34,13 @@ export default function CreateDeck() {
 		setTagText('')
 	}
 
-	function choseCover(index) {
-		setCoverIndex(index)
-		setImgUrl(covers[index])
-	}
+	useEffect(() => {
+		if (state) {
+			setImgUrl(state.cover)
+			setTitle(state.title)
+			setTags(state.tags)
+		}
+	}, [])
 
 	useEffect(() => {
 		setDeck({
@@ -56,7 +61,16 @@ export default function CreateDeck() {
 			<div className='create-header'>
 				<Link to='/'>⬅back</Link>
 				<h2>Create new deck</h2>
-				<button disabled={disableButton} onClick={() => createDeck(deck)}>
+				<button
+					disabled={disableButton}
+					onClick={() => {
+						if (state) {
+							updateDeck(state.deckId, deck)
+						} else {
+							createDeck(deck)
+						}
+					}}
+				>
 					Create
 				</button>
 			</div>
@@ -148,10 +162,10 @@ export default function CreateDeck() {
 						<div
 							key={index}
 							className='cover-frame'
-							onClick={() => choseCover(index)}
+							onClick={() => setImgUrl(src)}
 						>
 							<img className='cover' src={src} />
-							{coverIndex === index && (
+							{imgUrl === src && (
 								<span className='checkmark'>
 									<i className='fa-solid fa-circle-check'></i>
 								</span>
