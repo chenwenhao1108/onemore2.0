@@ -8,7 +8,17 @@ import {
 	getAuth,
 } from 'firebase/auth'
 import { auth, db } from '../../firebase'
-import { collection, setDoc, doc, getDoc, updateDoc } from 'firebase/firestore'
+import {
+	collection,
+	setDoc,
+	doc,
+	getDoc,
+	updateDoc,
+	query,
+	where,
+	getDocs,
+	deleteDoc,
+} from 'firebase/firestore'
 import { useNotificationContext } from './NotificationContextProvider.jsx'
 import LoadingPage from '../pages/LoadingPage.jsx'
 
@@ -65,8 +75,9 @@ function UserContextProvider({ children }) {
 			id: user.uid,
 			username,
 			avatar: '/pics/sunflower.png',
-			sevenDaysLearningTime: {},
 		})
+		const createTime = new Date()
+
 		const decksRef = collection(userDocRef, 'decks')
 		const deckRef = doc(decksRef)
 		setDoc(deckRef, {
@@ -92,14 +103,14 @@ function UserContextProvider({ children }) {
 			front:
 				'<blockquote><h4><strong>Can you describe the main difference between a </strong><code>.forEach() </code><strong>loop and a </strong><code>.map()</code><strong> loop and why you would pick one versus the other?</strong></h4></blockquote>',
 			correctTimes: 0,
-			nextTime: new Date(),
+			nextTime: createTime,
 		})
 		setDoc(cardRef2, {
 			back: `<p><span style="color: rgb(28, 30, 33)">A <strong>closure</strong> is the combination of a function and the lexical environment </span><span style="color: #FFD43B">within which that function was declared</span><span style="color: rgb(28, 30, 33)">. The word "lexical" refers to the fact that </span><span style="color: #63E6BE">lexical scoping uses the location where a variable is declared</span><span style="color: rgb(28, 30, 33)"> within the source code to determine where that variable is available. Closures are functions that have access to the outer (enclosing) function's variables—scope chain even after the outer function has returned.</span></p>`,
 			front:
 				'<h3><strong>What is a </strong><span style="color: #B197FC"><strong>closure</strong></span><strong>, and how/why would you use one?</strong></h3>',
 			correctTimes: 0,
-			nextTime: new Date(),
+			nextTime: createTime,
 		})
 	}
 
@@ -192,6 +203,98 @@ function UserContextProvider({ children }) {
 		}
 	}, [auth, db])
 
+	function getCurrentDate() {
+		const today = new Date()
+		return today.toISOString().split('T')[0] // YYYY-MM-DD
+	}
+
+	async function updateLearningTime(userId, timeSpent) {
+		const learningTimesRef = collection(
+			doc(db, 'user', userId),
+			'learningTimes'
+		)
+		const currentDate = getCurrentDate()
+		const currentDateRef = doc(learningTimesRef, currentDate)
+		try {
+			const snapshot = await getDoc(currentDateRef)
+			let preTime = 0
+			if (snapshot.exists()) {
+				preTime = snapshot.data().timeSpent
+			}
+			setDoc(currentDateRef, { timeSpent: timeSpent + preTime })
+			await cleanOldData(userId, currentDate)
+		} catch (error) {
+			console.error(error.message)
+		}
+	}
+
+	async function cleanOldData(userId, currentDate) {
+		try {
+			const sevenDaysAgo = new Date(
+				new Date(currentDate) - 7 * 24 * 60 * 60 * 1000
+			)
+				.toISOString()
+				.split('T')[0]
+			const q = query(
+				collection(db, 'user', userId, 'learningTimes'),
+				where('__name__', '<=', sevenDaysAgo)
+			)
+			const snapshot = await getDocs(q)
+			snapshot.docs.map(async (doc) => {
+				await deleteDoc(doc.ref)
+				console.log('cleaned old data')
+			})
+		} catch (error) {
+			console.error('Error cleaning up old data:', error)
+		}
+	}
+
+	async function getLearningTimes(userId) {
+		try {
+			const currentDate = getCurrentDate()
+			const sevenDaysAgo = new Date(
+				new Date(currentDate) - 7 * 24 * 60 * 60 * 1000
+			)
+				.toISOString()
+				.split('T')[0]
+			const learningTimesRef = collection(
+				doc(db, 'user', userId),
+				'learningTimes'
+			)
+			const q = query(
+				learningTimesRef,
+				where('__name__', '<=', currentDate),
+				where('__name__', '>', sevenDaysAgo)
+			)
+			const snapshot = await getDocs(q)
+			const times = snapshot.docs
+
+			const timeMap = {}
+			times.forEach((doc) => {
+				timeMap[doc.id] = doc.data().timeSpent || 0
+			})
+
+			const learningTimes = []
+			for (let i = 0; i < 7; i++) {
+				const nDaysAgo = new Date(
+					new Date(currentDate) - i * 24 * 60 * 60 * 1000
+				)
+					.toISOString()
+					.split('T')[0]
+
+				if (timeMap[nDaysAgo]) {
+					learningTimes.push(timeMap[nDaysAgo])
+				} else {
+					learningTimes.push(0)
+				}
+			}
+			return learningTimes
+		} catch (error) {
+			console.error(error)
+			return []
+		}
+	}
+
 	return loading ? (
 		<LoadingPage />
 	) : (
@@ -201,6 +304,8 @@ function UserContextProvider({ children }) {
 				login,
 				logout,
 				updateUserMessage,
+				updateLearningTime,
+				getLearningTimes,
 				user,
 			}}
 		>

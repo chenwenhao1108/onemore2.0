@@ -10,7 +10,7 @@ import { useUserContext } from '../../context/UserContextProvider'
 
 export default function Card() {
 	const { getCardsToLearn, updateCard, updateDeck } = useDecksContext()
-	const { user, updateUserMessage } = useUserContext()
+	const { user, updateLearningTime } = useUserContext()
 	const [deck, setDeck] = useState(null)
 	const [cardsToLearn, setCardsToLearn] = useState([])
 	const [currentIndex, setCurrentIndex] = useState(0)
@@ -85,24 +85,8 @@ export default function Card() {
 				duration,
 			}
 			updateDeck(deck.id, newDeck)
-			const isoEndTime = endTime.toISOString().split('T')[0]
 
-			let sevenDaysLearningTime = {}
-			if (isoEndTime in user.sevenDaysLearningTime) {
-				sevenDaysLearningTime = {
-					...user.sevenDaysLearningTime,
-					isoEndTime: user.sevenDaysLearningTime[isoEndTime] + duration,
-				}
-			} else {
-				sevenDaysLearningTime = {
-					...user.sevenDaysLearningTime,
-					isoEndTime: duration,
-				}
-			}
-			const newUser = {
-				...user,
-				sevenDaysLearningTime,
-			}
+			updateLearningTime(user.id, duration)
 		}
 	}, [done])
 
@@ -118,13 +102,14 @@ export default function Card() {
 		}
 
 		const now = new Date()
-		const nextTime = now.setTime(now.getTime() + min * 60 * 1000)
+		const nextTime = new Date(now.setTime(now.getTime() + min * 60 * 1000))
 		const card = {
 			...cardsToLearn[currentIndex],
 			correctTimes,
 			nextTime,
 		}
 		updateCard(deck.id, cardsToLearn[currentIndex].id, card)
+		setShowBack(false)
 		setCurrentIndex((p) => p + 1)
 	}
 

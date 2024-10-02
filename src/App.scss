@@ -225,28 +225,6 @@ footer {
 	border-radius: 8px;
 }
 
-.dashboard {
-	display: flex;
-	justify-content: space-between;
-	width: 80%;
-	margin: 2rem auto;
-}
-
-.dashboard-card {
-	height: 12rem;
-	width: 12rem;
-	background-color: var(--primary-color);
-	border-radius: 5px;
-	font-weight: 600;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.dashboard-card:hover {
-	cursor: pointer;
-}
-
 .cover-frame {
 	position: relative;
 	margin: 1.5rem;
@@ -709,5 +687,47 @@ footer {
 	}
 	to {
 		rotate: 360deg;
+	}
+}
+
+.dashboard {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding: 1rem 2rem;
+	.info {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		height: 15rem;
+		justify-content: space-around;
+		div {
+			font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+			font-weight: 600;
+			display: flex;
+			flex-direction: column;
+			span {
+				margin-right: auto;
+				margin-top: 0.2rem;
+				margin-left: 1rem;
+				color: #f07b3f;
+				font-size: 2rem;
+			}
+		}
+	}
+}
+
+.chart {
+	height: 15rem;
+	width: 50vw;
+}
+
+.progress-chart {
+	h3 {
+		margin-bottom: 1rem;
+	}
+	p {
+		margin-top: 0.2rem;
+		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 	}
 }

@@ -7,9 +7,6 @@ export default function Header() {
 			<a href='/' className='site-logo'>
 				<span>oneMore</span>
 			</a>
-			<a href='#'>
-				<i className='fa-solid fa-magnifying-glass'></i>
-			</a>
 			<Link to='/create/deck'>New Deck</Link>
 		</header>
 	)

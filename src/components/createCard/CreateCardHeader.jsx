@@ -96,7 +96,6 @@ export default function CreateCardHeader() {
 			</div>
 			<button className='save-button' onClick={uploadNewCard}>
 				<i className='fa-solid fa-floppy-disk'></i>
-				Add
 			</button>
 		</div>
 	)
