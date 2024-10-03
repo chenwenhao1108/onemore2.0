@@ -11,7 +11,7 @@ export default function Register() {
 	return (
 		<div className='login-form'>
 			<h1>Register</h1>
-			<img src='/src/pics/cat.jpg'></img>
+			<img src='/pics/cat.jpg'></img>
 			<input
 				type='text'
 				placeholder='Username'

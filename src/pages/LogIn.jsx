@@ -10,7 +10,7 @@ export default function LogInPage() {
 	return (
 		<div className='login-form'>
 			<h1>Please login first</h1>
-			<img src='/src/pics/cat.jpg'></img>
+			<img src='/pics/cat.jpg'></img>
 			<input
 				type='email'
 				placeholder='Email'
